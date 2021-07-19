@@ -1,7 +1,7 @@
 class Progress_bar extends HTMLElement {
-// ces getters et setters fonctionnent lorsqu'on utilise la syntaxe suivante pour changer la valeur d'un attribut :
-// element["progress-width"] = 300 pour les setters et element["progress-width"] pour les getters
-    
+  // ces getters et setters fonctionnent lorsqu'on utilise la syntaxe element["progress-width"]
+  
+
   // progress-width
   set progressWidth(value) {
     this.setAttribute("progress-width", value);
@@ -22,7 +22,7 @@ class Progress_bar extends HTMLElement {
 
   // progress-color
 
-  set color(value) {     
+  set color(value) {
     this.setAttribute("progress-color", value);
   }
 
@@ -47,13 +47,13 @@ class Progress_bar extends HTMLElement {
     }
   }
 
-    get value() {      
-        return this._value;           
+  get value() {
+    return this._value;
   }
 
   constructor() {
     super();
-    //dom de lombre 
+    //dom de lombre
     this.attachShadow({ mode: "open" });
     // (au lieu de this.innerHTML tout court)
     this.shadowRoot.innerHTML = `
@@ -90,44 +90,63 @@ class Progress_bar extends HTMLElement {
     this._value = this.getAttribute("progress-value");
     // on greffe la possibilité pour notre customElement d'émettre un évènement au click sur lui
     //l'event est nommé progress-click et est de type mouseEvent
-    this.shadowRoot.querySelector(".progress-bar-container").addEventListener("click", (ev) => {
-      this.dispatchEvent(new MouseEvent("progress-click", ev));
-    });
+    this.shadowRoot
+      .querySelector(".progress-bar-container")
+      .addEventListener("click", (ev) => {
+        this.dispatchEvent(new MouseEvent("progress-click", ev));
+      });
     this.render();
   }
 
   render() {
-    this.shadowRoot.querySelector(".progress").style["width"] = `${this._value}%`;
-    this.shadowRoot.querySelector(".progress").style["backgroundColor"] = `${this._color}`;
-    this.shadowRoot.querySelector(".progress-bar-container").style["width"] = `${this._progressWidth}px`;
-    this.shadowRoot.querySelector(".progress-bar-container").style["height"] = `${this._progressHeight}px`;
-    this.shadowRoot.querySelector(".progress-bar-container").style["backgroundColor"] = `${this._progressBackground}`;
+    this.shadowRoot.querySelector(".progress").style[
+      "width"
+    ] = `${this._value}%`;
+    this.shadowRoot.querySelector(".progress").style[
+      "backgroundColor"
+    ] = `${this._color}`;
+    this.shadowRoot.querySelector(".progress-bar-container").style[
+      "width"
+    ] = `${this._progressWidth}px`;
+    this.shadowRoot.querySelector(".progress-bar-container").style[
+      "height"
+    ] = `${this._progressHeight}px`;
+    this.shadowRoot.querySelector(".progress-bar-container").style[
+      "backgroundColor"
+    ] = `${this._progressBackground}`;
   }
   //indique au navigateur les attributs à surveiller
   static get observedAttributes() {
-      return ["progress-width", "progress-color", "progress-height", "progress-value", "progress-background"];
+    return [
+      "progress-width",
+      "progress-color",
+      "progress-height",
+      "progress-value",
+      "progress-background",
+    ];
   }
 
   // appelée quand on tente de changer la valeur d'un attribut avec setAttribute
-    attributeChangedCallback(name, oldVal, newVal) {
-      
-      const attrProps = {
-          "progress-width": "_progressWidth",
-          "progress-color": "_color",
-          "progress-height": "_progressHeight",
-          "progress-value": "_value",
-          "progress-background": "_progressBackground"
-        };
-        
-        if (name === "progress-value") {
-           if (parseInt(newVal) >= 0 && parseInt(newVal) <= 100) {
-                this._value = newVal;            
-            } else {
-                throw Error("La valeur doit être comprise entre 0 et 100");
-            }
-        } else {           
-            attrProps[name] ? (this[attrProps[name]] = newVal) : console.error('attribut absent');
+  attributeChangedCallback(name, oldVal, newVal) {
+    const attrProps = {
+      "progress-width": "_progressWidth",
+      "progress-color": "_color",
+      "progress-height": "_progressHeight",
+      "progress-value": "_value",
+      "progress-background": "_progressBackground",
+    };
+
+    if (name === "progress-value") {
+      if (parseInt(newVal) >= 0 && parseInt(newVal) <= 100) {
+        this._value = newVal;
+      } else {
+        throw Error("La valeur doit être comprise entre 0 et 100");
       }
+    } else {
+      attrProps[name]
+        ? (this[attrProps[name]] = newVal)
+        : console.error("attribut absent");
+    }
 
     // on met à jour
     this.render();

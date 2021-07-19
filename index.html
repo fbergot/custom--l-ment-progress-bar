@@ -4,36 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Progress-bar avec custom-elements</title>
     <script src="progress_bar.component.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <!-- <div class="progress-bar-container">
-        
-        <div class="progress p-25"></div>
-    </div> -->
+    <h1>Une progress-bar grace aux custom-elements</h1>
 
-    <user-progress progress-width='1000' progress-height="10" id='p' progress-color='#0c0' progress-background='#1ff' progress-value="0"></user-progress>
-    <user-progress progress-width='500' progress-height="30"  progress-color='#0c0' progress-background='#10f' progress-value="20"></user-progress>
+    <!-- le custom élément -->
+    <user-progress progress-width='1000' progress-height="10" id='p' progress-color='#a5a' progress-background='#00a' progress-value="0"></user-progress>
 
-    <script>
-        const prog = document.getElementById('p');
-        prog.addEventListener('progress-click', (e)=>console.log(e))
-        console.log(prog.getAttribute('progress-width'));
-        console.log(prog.getAttribute('progress-color'));
-        prog.setAttribute("progress-color", 'blue');
-        const arr = ["#ff1", "#156", "#fa5"];
-        console.log(prog.getAttribute('progress-value'));
-        let i = 0;
-        setInterval(()=> {
-            prog.value = i;
-            console.log(prog.progressWidth);
-            prog.setAttribute("progress-width", 500 + i);
-            prog.setAttribute("progress-height", 30 + i);
-            prog.setAttribute("progress-background", "red");
-            i+= 1;
-        },1000);
-    </script>
 </body>
 </html>
