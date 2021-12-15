@@ -1,7 +1,6 @@
 class Progress_bar extends HTMLElement {
-  // ces getters et setters fonctionnent lorsqu'on utilise la syntaxe element["progress-width"]
+  // lorsqu'on utilise la syntaxe element["progress-width"]
   
-
   // progress-width
   set progressWidth(value) {
     this.setAttribute("progress-width", value);
@@ -53,9 +52,7 @@ class Progress_bar extends HTMLElement {
 
   constructor() {
     super();
-    //dom de lombre
     this.attachShadow({ mode: "open" });
-    // (au lieu de this.innerHTML tout court)
     this.shadowRoot.innerHTML = `
             <div class='progress-bar-container'>
                 <div class="progress"></div>
@@ -88,8 +85,8 @@ class Progress_bar extends HTMLElement {
     this._progressBackground = this.getAttribute("progress-background");
     this._color = this.getAttribute("progress-color");
     this._value = this.getAttribute("progress-value");
-    // on greffe la possibilité pour notre customElement d'émettre un évènement au click sur lui
-    //l'event est nommé progress-click et est de type mouseEvent
+
+    //l'event => "progress-click" type mouseEvent
     this.shadowRoot
       .querySelector(".progress-bar-container")
       .addEventListener("click", (ev) => {
@@ -98,6 +95,10 @@ class Progress_bar extends HTMLElement {
     this.render();
   }
 
+  /**
+   * Update
+   * @memberof Progress_bar
+   */
   render() {
     this.shadowRoot.querySelector(".progress").style[
       "width"
@@ -115,7 +116,7 @@ class Progress_bar extends HTMLElement {
       "backgroundColor"
     ] = `${this._progressBackground}`;
   }
-  //indique au navigateur les attributs à surveiller
+  //indique les attributs à surveiller
   static get observedAttributes() {
     return [
       "progress-width",

@@ -1,6 +1,6 @@
-Custom élément :
+## Custom élément 
 
--La progress-bar est un custom élément . Elle répond à plusieurs attributs qui sont :
+La progress-bar est un custom élément . Elle répond à plusieurs attributs qui sont :
 
     -progress-width pour la taille total de la barre
     -progress-height pour sa largeur
@@ -8,7 +8,7 @@ Custom élément :
     -progress-value pour la valeur de progression (exprimée en %)
     -progress-background pour la couleur du fond de la barre
 
--On peut changer la valeur des attributs avec setAttribute et aussi de façon "direct" , le custom élément est équipé d'une api js :
+On peut changer la valeur des attributs avec setAttribute et aussi de façon "direct" :
 
 ex: element.value = 50 ou element.width = 300
 
