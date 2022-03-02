@@ -1,6 +1,6 @@
-## Custom élément 
+## Custom élément
 
-La progress-bar est un custom élément . Elle répond à plusieurs attributs qui sont :
+La user-progress est un custom élément . Elle répond à plusieurs attributs qui sont :
 
     -progress-width pour la taille total de la barre
     -progress-height pour sa largeur
